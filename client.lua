@@ -10,7 +10,7 @@ local vehicleSpeedMax = 0
 Citizen.CreateThread(function()
 
     while true do
-        Citizen.Wait(0)
+        Citizen.Wait(10)
         local me = GetPlayerPed(-1)
         local veh = GetVehiclePedIsIn(me, false)
         
@@ -53,7 +53,6 @@ Citizen.CreateThread(function()
         --If two or more tyres burst max drivavle speed is set to speedLimitTwoTires
         if tParams.tyresPopped >= 2 then
             local maxSpeedAfterBurst = speedLimitTwoTires
-            
             Wait(speedLimitDelay)
 
             while speedLimit >= maxSpeedAfterBurst do
@@ -66,11 +65,11 @@ Citizen.CreateThread(function()
         elseif tParams.tyresPopped > 0 then
             local maxSpeedAfterBurst = speedLimitOneTire
 
-            Wait(6000)
+            Wait(speedLimitDelay)
 
             while speedLimit >= maxSpeedAfterBurst do
                 SetVehicleMaxSpeed(veh, speedLimit)
-                speedLimit = speedLimit - 2.0
+                speedLimit = speedLimit - 3.0
                 Wait(200)
             end
 
